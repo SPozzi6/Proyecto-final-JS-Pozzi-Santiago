@@ -1,0 +1,305 @@
+//FUNCIONES
+
+//OBTENGO HABITACIONES LOCAL STORAGE
+function obtenerHabitaciones() {
+
+    let habitaciones = [];
+
+    const habitacionesLS = localStorage.getItem("habitaciones");
+
+    if (habitacionesLS === null) {
+
+        return habitaciones = listaHabitaciones;
+
+    } else {
+
+        return JSON.parse(habitacionesLS);
+
+    };
+};
+
+
+//OBTENGO RESERVAS LOCAL STORAGE
+function obtenerReservas() {
+
+    let reservas = [];
+
+    const reservasLS = localStorage.getItem("reservas");
+
+    if (reservasLS === null) {
+
+        return reservas;
+
+    } else {
+
+        return JSON.parse(reservasLS);
+
+    }
+
+};
+
+
+// FUNCION QUE RETORNA HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
+function buscarHabitacion (invitados) {
+    
+    return new Promise( (success, failure) => {
+        
+        fetch ("habitaciones.json")
+        .then( (response) => {
+            
+            return response.json();
+        
+        }).then( (listaHabitaciones) => {
+            
+            const habitacion = listaHabitaciones.find ((el) => {
+            return el.capacidad === parseInt(invitados);
+            });
+
+            success(habitacion);
+
+        });
+    });
+};
+
+
+//REVISO SI LA HABITACION ESTA RESERVADA
+function revisarReservado (habitacion) {
+
+    if (habitaciones === null) {
+
+        return true;
+
+    } else {
+
+        return habitaciones.some((el) => {
+
+            return el.idHabitacion === habitacion.idHabitacion && el.reservado === false;        
+
+        });
+
+    };
+
+};
+
+
+//VALIDO LOS DATOS INGRESADOS
+function validarDatos() {
+
+    if((inputCheckIn.value === null || inputCheckIn.value === "") || (inputCheckOut.value === null || inputCheckOut.value === "") || (inputInvitados.value === null || inputInvitados.value === "") || inputCheckIn.value > inputCheckOut.value) {
+        
+        event.preventDefault();
+        alert("Ingrese una fecha y cantidad de invitados válida")
+        
+        //LIMPIO INPUTS
+        inputCheckIn.value = "";
+        inputCheckOut.value = "";
+        inputInvitados.value = "";
+    };
+};
+
+
+//VARIABLES GLOBALES
+
+const formularioDeReserva = document.getElementById("reserva");
+
+const inputCheckIn = document.getElementById("check-in");
+const inputCheckOut = document.getElementById("check-out");
+const inputInvitados = document.getElementById("invitados");
+
+const DateTime = luxon.DateTime;
+
+
+// TRAIGO HABITACIONES DEL LOCAL STORAGE
+let habitaciones = obtenerHabitaciones();
+
+// TRAIGO RESERVAS
+let habitacionesReservadas = obtenerReservas();
+
+
+//EVENTOS
+
+formularioDeReserva.addEventListener("submit", async (event) => {
+
+    let checkIn = DateTime.fromISO(inputCheckIn.value);
+    let checkOut = DateTime.fromISO(inputCheckOut.value);
+    let invitados = inputInvitados.value;
+    let fechaHoy = DateTime.now();
+    let estadiaTotal = Math.floor(((checkOut - checkIn) / (1000 * 60 * 60 * 24)));
+
+    //VALIDO DATOS INGRESADOS
+    validarDatos();
+
+    //BUSCO HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
+    const habitacionEncontrada = await buscarHabitacion(invitados);
+    console.log(habitacionEncontrada)
+
+    // REVISO SI LA HABITACION ESTA RESERVADA
+    const disponible = revisarReservado(habitacionEncontrada);
+    console.log(disponible)
+
+    //SI LA HABITACION ESTA DISPONIBLE CARGO DATOS A LS, SI NO PIDO NUEVOS DATOS
+    if (disponible === true) {
+
+        if (checkIn < fechaHoy || checkOut < fechaHoy || checkIn > checkOut) {
+
+            alert("Vuelva a intentarlo");
+            
+        } else {
+
+            //CARGO DATOS AL LOCAL STORAGE             
+            localStorage.setItem("check-in", checkIn);
+            localStorage.setItem("check-out", checkOut);
+            localStorage.setItem("huespedes", invitados);
+            localStorage.setItem("estadia-total", estadiaTotal);
+            localStorage.setItem("habitacion-a-reservar", JSON.stringify(habitacionEncontrada));
+            localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
+            localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas))
+        
+        };
+    
+    } else {
+
+        alert ("No hay habitaciones disponibles para la cantidad de huespedes ingresados");
+
+    };
+
+});
+
+console.log(habitaciones);
+console.log(habitacionesReservadas);
+
+
+
+
+//TRAIGO HABITACION A RESERVAR DEL LOCAL STORAGE
+const habitacionAReservarJSON = localStorage.getItem("habitacion-a-reservar");
+const habitacionAReservar = JSON.parse(habitacionAReservarJSON)
+
+//TRAIGO ARRAY HABITACIONES
+const arrayHabitacionesJSON = localStorage.getItem("habitaciones")
+const arrayHabitaciones = JSON.parse(arrayHabitacionesJSON)
+
+
+//TRAIGO HABITACIONES RESERVADAS
+const arrayHabitacionesReservadasJSON = localStorage.getItem("habitaciones-reservadas")
+const arrayHabitacionesReservadas = JSON.parse(arrayHabitacionesReservadasJSON)
+
+
+//TRAIGO CHECK-IN / CHECK-OUT / CANTIDAD DE HUESPEDES / ESTADIA TOTAL
+const checkIn = localStorage.getItem("check-in");
+const checkOut = localStorage.getItem("check-out");
+
+const huespedesJSON = localStorage.getItem("huespedes");
+const huespedes = JSON.parse(huespedesJSON);
+
+const estadiaTotalJSON = localStorage.getItem("estadia-total");
+const estadiaTotal = JSON.parse(estadiaTotalJSON);
+
+
+//VARIABLES GLOBALES
+const realizarReserva = document.getElementById("datosReserva");
+
+const inputNombre = document.getElementById("nombre");
+const inputApellido = document.getElementById("apellido");
+const inputDni = document.getElementById("dni");
+const inputTelefono = document.getElementById("telefono");
+const inputEmail = document.getElementById("email");
+const inputPais = document.getElementById("pais");
+const inputCiudad = document.getElementById("ciudad");
+const inputDireccion = document.getElementById("direccion");
+const inputCodigoPostal = document.getElementById("codigo-postal");
+
+//FUNCIONES
+
+//FUNCION QUE COLOCA LA HABITACION COMO OCUPADA
+function habitacionOcupada (habitacion) {
+
+    arrayHabitaciones.filter((el) => {
+
+        if (el.idHabitacion === habitacionAReservar.idHabitacion) {
+        return el.reservado = true;
+
+        };
+    
+    });
+
+};
+
+
+//VALIDO LOS DATOS INGRESADOS EN EL FORMULARIO
+function validarDatosCliente(){
+
+    if(inputNombre.value, inputApellido.value, inputDni.value, inputTelefono.value, inputEmail.value, inputPais.value, inputCiudad.value, inputDireccion.value, inputCodigoPostal.value === null || inputNombre.value, inputApellido.value, inputDni.value, inputTelefono.value, inputEmail.value, inputPais.value, inputCiudad.value, inputDireccion.value, inputCodigoPostal.value === "") {
+        
+        event.preventDefault();
+        alert("Por favor, ingrese sus datos correctamente")
+        
+        //LIMPIO INPUTS
+        inputNombre.value = "";
+        inputApellido.value = "";
+        inputDni.value = "";
+        inputTelefono.value = "";
+        inputEmail.value = "";
+        inputPais.value = "";
+        inputCiudad.value = "";
+        inputDireccion.value = "";
+        inputCodigoPostal.value = "";
+
+        } else{
+        
+            window.location.href = "../index.html";
+        
+        };
+
+};
+
+//EVENTOS
+realizarReserva.addEventListener ("submit", (event) => {
+
+    const nombre = inputNombre.value;
+    const apellido = inputApellido.value;
+    const dni = inputDni.value;
+    const telefono = inputTelefono.value;
+    const email = inputEmail.value;
+    const pais = inputPais.value;
+    const ciudad = inputCiudad.value;
+    const direccion = inputDireccion.value;
+    const codigoPostal = inputCodigoPostal.value;
+
+    //VALIDO LOS DATOS DEL CLIENTE
+    validarDatosCliente();
+
+    if (nombre, apellido, dni, telefono, email, pais, ciudad, direccion, codigoPostal === null || nombre, apellido, dni, telefono, email, pais, ciudad, direccion, codigoPostal === "") {
+    
+        alert("Vuelva a intentarlo");
+
+    } else {
+    
+        //CALCULO PRECIO DE LA ESTADIA
+        const precioEstadia = estadiaTotal * habitacionAReservar.precioPorNoche;
+        
+        //CREO NUEVO CLIENTE AL ENVIAR FORMULARIO DE REGISTRO
+        const nuevoCliente = new Cliente (nombre, apellido, dni, telefono, email, pais, ciudad, direccion, codigoPostal);
+        listaClientes.push(nuevoCliente);
+
+        //PUSHEO LA RESERVA
+        habitacionesReservadas.push(new Reserva (habitacionAReservar, nuevoCliente, checkIn, checkOut, precioEstadia))
+
+        //COLOCO RESERVADO = TRUE EN LA HABITACION A RESERVAR
+        habitacionOcupada(habitacionAReservar);
+
+        //CARGO RESERVAS AL LOCAL STORAGE
+        localStorage.setItem("reservas", JSON.stringify(habitacionesReservadas));
+        localStorage.setItem("habitaciones", JSON.stringify(arrayHabitaciones));
+        alert("Su reserva ha sido registrada exitosamente, muchas gracias");
+
+        //BORRO DATOS INNECESARIOS
+        localStorage.removeItem("habitacion-a-reservar");
+        localStorage.removeItem("check-in");
+        localStorage.removeItem("check-out");
+        localStorage.removeItem("huespedes");
+        localStorage.removeItem("estadia-total");
+
+    };
+
+});
