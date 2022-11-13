@@ -1,8 +1,9 @@
 //CLASS HABITACIONES
 class Habitacion {
 
-    constructor (idHabitacion, capacidad, precioPorNoche) {
+    constructor (nombre, idHabitacion, capacidad, precioPorNoche) {
         
+        this.nombre = nombre;
         this.idHabitacion = idHabitacion;
         this.capacidad = capacidad;
         this.precioPorNoche = precioPorNoche;
@@ -13,9 +14,9 @@ class Habitacion {
 
 const listaHabitaciones = [];
 
-listaHabitaciones.push(new Habitacion (1, 1, 2000));
-listaHabitaciones.push(new Habitacion (2, 2, 4000));
-listaHabitaciones.push(new Habitacion (3, 3, 6000));
-listaHabitaciones.push(new Habitacion (4, 4, 8000));
-listaHabitaciones.push(new Habitacion (5, 5, 10000));
-listaHabitaciones.push(new Habitacion (6, 6, 12000));
+listaHabitaciones.push(new Habitacion ("Habitación simple", 1, 1, 2000));
+listaHabitaciones.push(new Habitacion ("Habitación doble", 2, 2, 4000));
+listaHabitaciones.push(new Habitacion ("Habitación triple", 3, 3, 6000));
+listaHabitaciones.push(new Habitacion ("Habitación familiar", 4, 4, 8000));
+listaHabitaciones.push(new Habitacion ("Habitación deluxe", 5, 5, 10000));
+listaHabitaciones.push(new Habitacion ("Habitación premiun", 6, 6, 12000));

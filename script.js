@@ -1,3 +1,5 @@
+// COMIENZA SECCION CHECK IN - CHECK OUT - INVITADOS Y EVENTO DE BUSQUEDA DE HABITACION
+
 //FUNCIONES
 
 //OBTENGO HABITACIONES LOCAL STORAGE
@@ -83,18 +85,25 @@ function revisarReservado (habitacion) {
 
 
 //VALIDO LOS DATOS INGRESADOS
-function validarDatos() {
+function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
 
-    if((inputCheckIn.value === null || inputCheckIn.value === "") || (inputCheckOut.value === null || inputCheckOut.value === "") || (inputInvitados.value === null || inputInvitados.value === "") || inputCheckIn.value > inputCheckOut.value) {
+    if(checkIn.c === null || checkIn === "" || checkOut.c === null || checkOut === "" || invitados === null || invitados === "" || checkIn > checkOut || checkIn < fechaHoy || checkOut < fechaHoy) {
         
         event.preventDefault();
-        alert("Ingrese una fecha y cantidad de invitados válida")
         
+        alert("Por favor vuelva a ingresar los datos")
         //LIMPIO INPUTS
         inputCheckIn.value = "";
         inputCheckOut.value = "";
         inputInvitados.value = "";
-    };
+
+        return false;
+
+    }    
+        else {
+            return true;
+        }
+    ;
 };
 
 
@@ -108,7 +117,6 @@ const inputInvitados = document.getElementById("invitados");
 
 const DateTime = luxon.DateTime;
 
-
 // TRAIGO HABITACIONES DEL LOCAL STORAGE
 let habitaciones = obtenerHabitaciones();
 
@@ -116,8 +124,7 @@ let habitaciones = obtenerHabitaciones();
 let habitacionesReservadas = obtenerReservas();
 
 
-//EVENTOS
-
+//EVENTO DE BUSQUEDA DE HABITACION
 formularioDeReserva.addEventListener("submit", async (event) => {
 
     let checkIn = DateTime.fromISO(inputCheckIn.value);
@@ -127,24 +134,19 @@ formularioDeReserva.addEventListener("submit", async (event) => {
     let estadiaTotal = Math.floor(((checkOut - checkIn) / (1000 * 60 * 60 * 24)));
 
     //VALIDO DATOS INGRESADOS
-    validarDatos();
+    const validar = validarDatos(checkIn, checkOut, fechaHoy, invitados);
+    console.log(validar)
 
     //BUSCO HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
     const habitacionEncontrada = await buscarHabitacion(invitados);
     console.log(habitacionEncontrada)
 
-    // REVISO SI LA HABITACION ESTA RESERVADA
+    //REVISO SI LA HABITACION ESTA RESERVADA
     const disponible = revisarReservado(habitacionEncontrada);
     console.log(disponible)
 
     //SI LA HABITACION ESTA DISPONIBLE CARGO DATOS A LS, SI NO PIDO NUEVOS DATOS
-    if (disponible === true) {
-
-        if (checkIn < fechaHoy || checkOut < fechaHoy || checkIn > checkOut) {
-
-            alert("Vuelva a intentarlo");
-            
-        } else {
+    if (disponible === true && validar === true) {
 
             //CARGO DATOS AL LOCAL STORAGE             
             localStorage.setItem("check-in", checkIn);
@@ -154,22 +156,19 @@ formularioDeReserva.addEventListener("submit", async (event) => {
             localStorage.setItem("habitacion-a-reservar", JSON.stringify(habitacionEncontrada));
             localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
             localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas))
-        
-        };
-    
+
     } else {
 
-        alert ("No hay habitaciones disponibles para la cantidad de huespedes ingresados");
+        alert ("No hay habitaciones disponibles o los datos ingresados son incorrectos");
 
     };
 
 });
 
-console.log(habitaciones);
-console.log(habitacionesReservadas);
+// TERMINA SECCION CHECK IN - CHECK OUT - INVITADOS Y EVENTO DE BUSQUEDA DE HABITACION
 
 
-
+// EMPIEZA SECCION FOMULARIO DE DATOS PARA CONFIRMAR RESERVA
 
 //TRAIGO HABITACION A RESERVAR DEL LOCAL STORAGE
 const habitacionAReservarJSON = localStorage.getItem("habitacion-a-reservar");
@@ -253,7 +252,7 @@ function validarDatosCliente(){
 
 };
 
-//EVENTOS
+//EVENTO FORMULARIO DE RESERVA
 realizarReserva.addEventListener ("submit", (event) => {
 
     const nombre = inputNombre.value;
@@ -303,3 +302,29 @@ realizarReserva.addEventListener ("submit", (event) => {
     };
 
 });
+
+// TERMINA SECCION FOMULARIO DE DATOS PARA CONFIRMAR RESERVA
+
+//EVENTO PARA CANCELAR LA OPERACION DE RESERVA
+const cancelar = document.getElementById("cancel")
+
+cancelar.addEventListener ("click", (event) => {
+
+    event.preventDefault();
+
+    //ELIMINO DATOS DEL LOCAL STORAGE
+    localStorage.removeItem("habitacion-a-reservar");
+    localStorage.removeItem("check-in");
+    localStorage.removeItem("check-out");
+    localStorage.removeItem("huespedes");
+    localStorage.removeItem("estadia-total");
+    
+    alert("Operación cancelada");
+
+    //RECARGO LA PAGINA
+    location.reload();
+})
+
+
+console.log(habitaciones);
+console.log(habitacionesReservadas);

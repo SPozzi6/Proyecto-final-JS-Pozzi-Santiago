@@ -1,35 +1,41 @@
 [
     {
+        "nombre": "Single Room",
         "idHabitacion": 1,
         "capacidad": 1,
         "precioPorNoche": 2000,
         "reservado": false
     },
     {
+        "nombre": "Habitación doble",
         "idHabitacion": 2,
         "capacidad": 2,
         "precioPorNoche": 4000,
         "reservado": false
     },
     {
+        "nombre": "Habitación triple",
         "idHabitacion": 3,
         "capacidad": 3,
         "precioPorNoche": 6000,
         "reservado": false
     },
     {
+        "nombre": "Habitación familiar",
         "idHabitacion": 4,
         "capacidad": 4,
         "precioPorNoche": 8000,
         "reservado": false
     },
     {
+        "nombre": "Habitación deluxe",
         "idHabitacion": 5,
         "capacidad": 5,
         "precioPorNoche": 10000,
         "reservado": false
     },
     {
+        "nombre": "Habitación premiun",
         "idHabitacion": 6,
         "capacidad": 6,
         "precioPorNoche": 12000,

@@ -17,8 +17,9 @@ body {
 }
 
 .h2-subtitulo {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
+    color: white;
 }
 
 .h3-subtitulo {
@@ -150,12 +151,19 @@ body {
 
             .texto-articulo {
                 text-align: center;
+                color: white;
+                font-weight: bold;
             }
 
             .link-imagen {
                 text-decoration: none;
                 font-weight: bold;
                 color: black;
+            }
+
+            .link-imagen:hover {
+                color: white;
+                transition: 1s;
             }
 /* TERMINA SECCION HABITACIONES */
 
@@ -195,6 +203,7 @@ body {
 
     .texto-general {
         font-size: 1.5rem;
+        font-weight: bold;
     }
 
 .contenedor-redes {
@@ -210,68 +219,109 @@ body {
 
 
 /* EMPIEZA SECCION HABITACION ENCONTRADA Y SECCION FORMULARIO DE RESERVA */
-.contenedor-general {
-    width: 100%;
+
+.hidden {
+    display: none;
 }
 
-.contenedor-card {
-    border-radius: 10px;
+.prioridad {
+    position: fixed;
+    top: 50%;
+    left: 50%;
     width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color:rgba(53, 124, 246, 0.404);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+.scroll-block {
+    overflow-y: hidden;
+}
+
+.seccion-card {
     position: relative;
+    top: 15%;
 }
 
-    articulo-card {
-        padding-top: 10px;
-        padding-bottom: 10px;
+    .contenedor-general {
+        width: 100%;
     }
 
-.contenedor-form-reserva {
-    border-radius: 10px;
-    width: 100%;
+    .contenedor-card {
+        border-radius: 10px;
+        width: 100%;
+        position: relative;
+    }
+
+        articulo-card {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+.seccion-reserva {
+    position: relative;
+    top: 12%;
 }
 
-    .contenedor-casillas-reserva {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 5px;
+    .contenedor-form-reserva {
+        border-radius: 10px;
+        width: 100%;
     }
 
-        .contenedor-h2 {
-            width: 100%;
-            text-align: center;
-        }
-    
-        .contenedor-casilla {
-            width: 100%;
+        .contenedor-casillas-reserva {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px;
         }
 
-        .casilla-reserva {
-            font-size: 1.5rem;
-            margin: 5px;
-        }
-
-            .contenedor-boton {
+            .contenedor-h2 {
+                width: 100%;
                 text-align: center;
             }
         
-                .boton-reserva {
-                    font-size: 1.5rem;
-                    border: none;
-                    border-radius: 5px;
-                    background-color: #ffcd70;
-                    padding: 5px;
-                }
+            .contenedor-casilla {
+                width: 100%;
+            }
 
-                .boton-reserva:hover{
-                    background-color: grey;
-                    transition: 1s;
+            .casilla-reserva {
+                font-size: 1.5rem;
+                margin-top: 3px;
+                margin-bottom: 3px;
+            }
+
+                .contenedor-boton {
+                    text-align: center;
                 }
+            
+                    .boton-reserva {
+                        font-size: 1.5rem;
+                        border: none;
+                        border-radius: 5px;
+                        background-color: #ffcd70;
+                        padding: 5px 50px;
+                        margin-top: 3px;
+                        margin-bottom: 3px;
+                    }
+
+                    .boton-reserva:hover{
+                        background-color: grey;
+                        transition: 1s;
+                    }
 /* TERMINA SECCION HABITACION ENCONTRADA Y SECCION FORMULARIO DE RESERVA */
 
 
 /* EMPIEZA RESOLUCION >= 576px */
 @media (min-width: 576px) {
+
+.h2-subtitulo {
+    font-size: 3rem;
+}
 
     /* EMPIEZA HEADER */
     .imagen-header {
@@ -304,7 +354,7 @@ body {
 
     /* INICIA SECCION FORMULARIO DE RESERVA */
     .contenedor-casillas-reserva {
-        width: 70%;
+        width: 100%;
         margin: auto;
     }
     /* TERMINA SECCION FORMULARIO DE RESERVA */
@@ -426,14 +476,38 @@ body {
             }
 /* TERMINA SECCION HABITACION ENCONTRADA Y SECCION FORMULARIO DE RESERVA */
 
+/* EMPIEZA SECCION CARD DE RESERVA */
+
 .hidden {
     display: none;
 }
 
+.prioridad {
+    flex-direction: row;
+    justify-content: center;
+}
 
+.scroll-block {
+    overflow-y: hidden;
+}
 
+.seccion-card {
+    top: 0%;
+    height: 470px; 
+}
 
+.seccion-reserva {
+    top: 0%;
+}
 
+    .contenedor-casillas-reserva {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 5px;
+    }
 
+/* TERMINA SECCION CARD DE RESERVA */
 
 }
