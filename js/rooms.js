@@ -10,21 +10,21 @@ function crearCard(habitacion, nombre, precio) {
     const body = document.getElementById("body");
     body.classList.add("scroll-block");
 
-    const contenedorGeneral = document.getElementById("contenedor-general");
+    const contenedorGeneral = document.getElementById("contenedor-general-cards");
     contenedorGeneral.classList.remove("hidden");
     contenedorGeneral.classList.add("prioridad");
     
     const contenedorCard = document.getElementById("contenedor-card");
 
     const articulo = document.createElement("article");
-    articulo.className ="articulo-card";
+    articulo.classList.add("articulo-card");
 
     const img = document.createElement("img");
     img.setAttribute('src', `../images/habitaciones/habitacion${habitacion}.jpg`);
-    img.className = "imagen-articulo";
+    img.classList.add("imagen-articulo");
 
     const div = document.createElement("div");
-    div.className = "contenedor-texto-articulo";
+    div.classList.add("contenedor-texto-articulo");
 
     const parrafo1 = document.createElement("p");
     parrafo1.innerText = `${nombre}`;
@@ -32,7 +32,7 @@ function crearCard(habitacion, nombre, precio) {
 
     const parrafo2 = document.createElement("p");
     parrafo2.innerText = `Precio por noche: $${precio}`;
-    parrafo2.classList.add("texto-articulo")
+    parrafo2.classList.add("texto-articulo");
 
     div.append(parrafo1);
     div.append(parrafo2);

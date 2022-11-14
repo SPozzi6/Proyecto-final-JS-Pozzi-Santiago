@@ -315,6 +315,58 @@ body {
                     }
 /* TERMINA SECCION HABITACION ENCONTRADA Y SECCION FORMULARIO DE RESERVA */
 
+/* EMPIEZA SECCION MIS RESERVAS */
+.prioridad-reserva {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background-color:rgba(53, 124, 246, 0.404);
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+}
+
+    .contenedor-general-reserva {
+        width: 100%;
+    }
+
+        .card-reserva {
+            position: relative;
+            top: 15%;
+        }
+
+            .contenedor-reserva {
+                border-radius: 10px;
+                width: 100%;
+                position: relative;
+            }
+
+                .articulo-reserva {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    position: relative;
+                }
+
+                    .imagen-reserva {
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                        .contenedor-texto-reserva {
+                            font-size: 1.5rem;
+                            text-align: center;
+                            position: absolute;
+                            top: 70%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                        }
+/* TERMINA SECCION MIS RESERVAS */
+
 
 /* EMPIEZA RESOLUCION >= 576px */
 @media (min-width: 576px) {
@@ -437,6 +489,10 @@ body {
         .articulo {
             width: 33%;
         }
+
+            .texto-articulo {
+                font-size: 2rem;
+            }
     /* TERMINA SECCION HABITACIONES */
 
 
@@ -496,17 +552,17 @@ body {
     height: 470px; 
 }
 
-.seccion-reserva {
-    top: 0%;
-}
-
-    .contenedor-casillas-reserva {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 5px;
+    .seccion-reserva {
+        top: 0%;
     }
+
+        .contenedor-casillas-reserva {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 5px;
+        }
 
 /* TERMINA SECCION CARD DE RESERVA */
 

@@ -42,7 +42,7 @@
                             <a class="link-lista" href="#contacto">CONTACTO</a>
                         </li>
                         <li class="nav-item px-3 py-3">
-                            <a class="link-lista" href="#">MIS RESERVAS</a>
+                            <a id="mis-reservas" class="link-lista" href="#">MIS RESERVAS</a>
                         </li>
                     </ul>
                 </div>
@@ -89,7 +89,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion1.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación simple</p>
                     <p class="texto-articulo">Precio por noche: 2000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -97,7 +97,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion2.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación doble</p>
                     <p class="texto-articulo">Precio por noche: 4000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -105,7 +105,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion3.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación triple</p>
                     <p class="texto-articulo">Precio por noche: 6000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -113,7 +113,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion4.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación familiar</p>
                     <p class="texto-articulo">Precio por noche: 8000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -121,7 +121,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion5.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación deluxe</p>
                     <p class="texto-articulo">Precio por noche: 10000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -129,7 +129,7 @@
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
                 <img src="images/habitaciones/habitacion6.jpg" class="imagen-articulo px-3" alt="">
                 <div class="contenedor-texto-articulo">
-                    <p class="texto-articulo">Nombre habitación</p>
+                    <p class="texto-articulo">Habitación premiun</p>
                     <p class="texto-articulo">Precio por noche: 12000$</p>
                     <a href="index.html" class="link-imagen">Reservar</a>
                 </div>
@@ -140,11 +140,22 @@
 
 
     <!-- EMPIEZA SECCION SERVICIOS -->
-
     <section class= "mx-0 my-3 container-fluid" id="servicios">
-
+        <section class= "mx-0 my-3 container-fluid" id="habitaciones">
+            <div class="contenedor-articulo container-fluid row">
+                <div class="py-3 px-3 contenedor-h2">
+                    <h2 class="h2-subtitulo">Servicios</h2>
+                </div>
+                <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                    <img src="images/habitaciones/habitacion1.jpg" class="imagen-articulo px-3" alt="">
+                    <div class="contenedor-texto-articulo">
+                        <p class="texto-articulo">Habitación simple</p>
+                        <p class="texto-articulo">Precio por noche: 2000$</p>
+                    </div>
+                </article>
+            </div>
+        </section>
     </section>
-
     <!-- TERMINA SECCION SERVICIOS -->
 
 
@@ -177,8 +188,8 @@
     </section>
     <!-- TERMINA SECCION DE CONTACTO -->
 
-    
-    <div id="contenedor-general" class="contenedor-general hidden">
+    <!-- EMPIEZA SECCION HABITACION ENCONTRADA Y FORMULARIO DE RESERVA -->
+    <div id="contenedor-general-cards" class="contenedor-general hidden">
         <!--EMPIEZA SECCION HABITACION ENCONTRADA-->
         <section class= "mx-5 my-3 seccion-card">
             <div class="py-3 px-3 contenedor-h2">
@@ -190,7 +201,7 @@
         <!--TERMINA SECCION HABITACION ENCONTRADA-->
         
         <!-- EMPIEZA SECCION FORMULARIO DE RESERVA -->
-        <section class= "mx-5 my-3 seccion-reserva" id="contacto">
+        <section class= "mx-5 my-3 seccion-reserva">
             <form action="#" class="contenedor-form-reserva" id="datosReserva">
                 <fieldset class="contenedor-casillas-reserva">   
                     <div class="py-3 px-3 contenedor-h2">
@@ -251,13 +262,25 @@
                 <button id="cancel" class="button-rounded btn-lg boton-reserva">Cancelar</button>
             </div>
         </section>
-        <!-- TERMINA SECCION DE RESERVA -->
+        <!-- TERMINA SECCION FORMULARIO DE RESERVA -->
     </div>
+    <!-- TERMINA SECCION HABITACION ENCONTRADA Y FORMULARIO DE RESERVA -->
 
 
-    <div id="contenedor-reservas" class="contenedor-general hidden">
-
+    <!-- EMPIEZA SECCION MIS RESERVAS -->
+    <div id="contenedor-general-reserva" class="contenedor-general-reserva hidden">
+        <section class="mx-5 my-3 card-reserva">
+            <div class="py-3 px-3 contenedor-h2">
+                <h2 class="h2-subtitulo">Mis reservas</h2>
+            </div>
+            <div id="contenedor-reserva" class="contenedor-reserva">
+                <div class="py-3 px-3 contenedor-boton">
+                    <button id="boton-mis-reservas" class="button-rounded btn-lg boton-reserva">Cerrar</button>
+                </div>
+            </div>
+        </section>
     </div>
+    <!-- TERMINA SECCION MIS RESERVAS -->
 
 
     <!-- EMPIEZA FOOTER -->
