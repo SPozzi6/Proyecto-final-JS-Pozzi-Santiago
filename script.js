@@ -36,7 +36,7 @@ function obtenerReservas() {
 
         return JSON.parse(reservasLS);
 
-    }
+    };
 
 };
 
@@ -103,11 +103,11 @@ function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
 
         return false;
 
-    }    
-        else {
-            return true;
-        }
-    ;
+    } else {
+        
+        return true;
+        
+    };
 };
 
 
@@ -115,10 +115,12 @@ function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
 
 const formularioDeReserva = document.getElementById("reserva");
 
+// CHECK IN / CHECK OUT / INVITADOS
 const inputCheckIn = document.getElementById("check-in");
 const inputCheckOut = document.getElementById("check-out");
 const inputInvitados = document.getElementById("invitados");
 
+// LUXON DATE TIME
 const DateTime = luxon.DateTime;
 
 // TRAIGO HABITACIONES DEL LOCAL STORAGE
@@ -141,15 +143,12 @@ formularioDeReserva.addEventListener("submit", async (event) => {
 
     //VALIDO DATOS INGRESADOS
     const validar = validarDatos(checkIn, checkOut, fechaHoy, invitados);
-    console.log(validar)
 
     //BUSCO HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
     const habitacionEncontrada = await buscarHabitacion(invitados);
-    console.log(habitacionEncontrada)
 
     //REVISO SI LA HABITACION ESTA RESERVADA
     const disponible = revisarReservado(habitacionEncontrada);
-    console.log(disponible)
 
     //SI LA HABITACION ESTA DISPONIBLE CARGO DATOS A LS, SI NO PIDO NUEVOS DATOS
     if (disponible === true && validar === true) {
@@ -189,16 +188,16 @@ formularioDeReserva.addEventListener("submit", async (event) => {
 
 //TRAIGO HABITACION A RESERVAR DEL LOCAL STORAGE
 const habitacionAReservarJSON = localStorage.getItem("habitacion-a-reservar");
-const habitacionAReservar = JSON.parse(habitacionAReservarJSON)
+const habitacionAReservar = JSON.parse(habitacionAReservarJSON);
 
 //TRAIGO ARRAY HABITACIONES
-const arrayHabitacionesJSON = localStorage.getItem("habitaciones")
-const arrayHabitaciones = JSON.parse(arrayHabitacionesJSON)
+const arrayHabitacionesJSON = localStorage.getItem("habitaciones");
+const arrayHabitaciones = JSON.parse(arrayHabitacionesJSON);
 
 
 //TRAIGO HABITACIONES RESERVADAS
-const arrayHabitacionesReservadasJSON = localStorage.getItem("habitaciones-reservadas")
-const arrayHabitacionesReservadas = JSON.parse(arrayHabitacionesReservadasJSON)
+const arrayHabitacionesReservadasJSON = localStorage.getItem("habitaciones-reservadas");
+const arrayHabitacionesReservadas = JSON.parse(arrayHabitacionesReservadasJSON);
 
 
 //TRAIGO CHECK-IN / CHECK-OUT / CANTIDAD DE HUESPEDES / ESTADIA TOTAL
@@ -305,7 +304,7 @@ realizarReserva.addEventListener ("submit", (event) => {
         listaClientes.push(nuevoCliente);
 
         //PUSHEO LA RESERVA
-        habitacionesReservadas.push(new Reserva (habitacionAReservar, nuevoCliente, checkIn, checkOut, precioEstadia))
+        habitacionesReservadas.push(new Reserva (habitacionAReservar, nuevoCliente, checkIn, checkOut, precioEstadia));
 
         //COLOCO RESERVADO = TRUE EN LA HABITACION A RESERVAR
         habitacionOcupada(habitacionAReservar);
@@ -325,6 +324,7 @@ realizarReserva.addEventListener ("submit", (event) => {
             showConfirmButton: true,
             confirmButtonText: "Confirmar",
             allowOutsideClick: false,
+        
         }).then ((result) => {
             
             if (result.isConfirmed) {
@@ -343,7 +343,7 @@ realizarReserva.addEventListener ("submit", (event) => {
 // TERMINA SECCION FOMULARIO DE DATOS PARA CONFIRMAR RESERVA
 
 //EVENTO PARA CANCELAR LA OPERACION DE RESERVA
-const cancelar = document.getElementById("cancel")
+const cancelar = document.getElementById("cancel");
 
 cancelar.addEventListener ("click", (event) => {
 
@@ -364,6 +364,7 @@ cancelar.addEventListener ("click", (event) => {
         showConfirmButton: true,
         confirmButtonText: "Volver",
         allowOutsideClick: false,
+    
     }).then((result) => {
 
         if (result.isConfirmed) {

@@ -28,7 +28,7 @@ function crearCard(habitacion, nombre, precio) {
 
     const parrafo1 = document.createElement("p");
     parrafo1.innerText = `${nombre}`;
-    parrafo1.classList.add("texto-articulo")
+    parrafo1.classList.add("texto-articulo");
 
     const parrafo2 = document.createElement("p");
     parrafo2.innerText = `Precio por noche: $${precio}`;
@@ -50,5 +50,5 @@ if (habitacionSeleccionada !== null) {
     nombre = habitacionSeleccionada.nombre;
     precio = habitacionSeleccionada.precioPorNoche;
 
-    crearCard(habitacion, nombre, precio)
+    crearCard(habitacion, nombre, precio);
 };

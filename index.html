@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-0 mb-lg-0">
                         <li class="nav-item px-3 py-3">
-                            <a class="link-lista" href="index.html">INICIO</a>
+                            <a class="link-lista" href="#inicio">INICIO</a>
                         </li>
                         <li class="nav-item px-3 py-3">
                             <a class="link-lista" href="#habitaciones">HABITACIONES</a>
@@ -52,7 +52,7 @@
     <!-- EMPIEZA HEADER -->
     <header class="header" id="inicio">
         <div class="h1-header">
-            <img src="images/logo/logo.svg" class="imagen-header" alt="">
+            <img src="images/logo/logo.svg" class="imagen-header" alt="imagen héroe de Hotel Bella Vista">
         </div>
     </header>
     <!-- TERMINA HEADER -->
@@ -85,7 +85,7 @@
                 <h2 class="h2-subtitulo">Nuestras habitaciones</h2>
             </div>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion1.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion1.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 1">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación simple</p>
                     <p class="texto-articulo">Precio por noche: 2000$</p>
@@ -93,7 +93,7 @@
                 </div>
             </article>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion2.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion2.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 2">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación doble</p>
                     <p class="texto-articulo">Precio por noche: 4000$</p>
@@ -101,7 +101,7 @@
                 </div>
             </article>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion3.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion3.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 3">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación triple</p>
                     <p class="texto-articulo">Precio por noche: 6000$</p>
@@ -109,7 +109,7 @@
                 </div>
             </article>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion4.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion4.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 4">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación familiar</p>
                     <p class="texto-articulo">Precio por noche: 8000$</p>
@@ -117,7 +117,7 @@
                 </div>
             </article>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion5.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion5.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 5">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación deluxe</p>
                     <p class="texto-articulo">Precio por noche: 10000$</p>
@@ -125,7 +125,7 @@
                 </div>
             </article>
             <article class="articulo col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                <img src="images/habitaciones/habitacion6.jpg" class="imagen-articulo px-3" alt="">
+                <img src="images/habitaciones/habitacion6.jpg" class="imagen-articulo px-3" alt="imagen de la habitacion numero 6">
                 <div class="contenedor-texto-articulo">
                     <p class="texto-articulo">Habitación premiun</p>
                     <p class="texto-articulo">Precio por noche: 12000$</p>
@@ -169,6 +169,7 @@
 
     <!-- EMPIEZA SECCION HABITACION ENCONTRADA Y FORMULARIO DE RESERVA -->
     <div id="contenedor-general-cards" class="contenedor-general hidden">
+        
         <!--EMPIEZA SECCION HABITACION ENCONTRADA-->
         <section class= "mx-5 my-3 seccion-card">
             <div class="py-3 px-3 contenedor-h2">
@@ -252,10 +253,10 @@
             <div class="py-3 px-3 contenedor-h2">
                 <h2 class="h2-subtitulo">Mis reservas</h2>
             </div>
+            <div class="py-3 px-3 contenedor-boton">
+                <button id="boton-mis-reservas" class="button-rounded btn-lg boton-reserva">Cerrar</button>
+            </div>
             <div id="contenedor-reserva" class="contenedor-reserva">
-                <div class="py-3 px-3 contenedor-boton">
-                    <button id="boton-mis-reservas" class="button-rounded btn-lg boton-reserva">Cerrar</button>
-                </div>
             </div>
         </section>
     </div>
@@ -265,7 +266,7 @@
     <!-- EMPIEZA FOOTER -->
     <footer class="mx-0 my-5">
         <div class="informacion-contacto">
-            <h4 class="h4-subtitulo">Hotel Bella Vista</h4>
+            <h4 class="h3-subtitulo">Hotel Bella Vista</h4>
             <p class="texto-general">E-mail: bellavistaresorte@gmail.com</p>
             <p class="texto-general">Telefono: +54 9 11 21312312</p>
             <p class="texto-general">Mar del Plata, Buenos Aires, Argentina</p>
@@ -276,7 +277,7 @@
             <a href="https://www.instagram.com" target="_blank">
                 <img src="images/logo-redes/logoinstagram.png" class="logos-redes" alt="logo de instagram">
             </a>
-            <a href="pages/error404.html" target="_blank">
+            <a href="https://twitter.com" target="_blank">
                 <img src="images/logo-redes/logotwitter.png" class="logos-redes" alt="logo de twitter">
             </a>
             <a href="https://www.facebook.com" target="_blank">

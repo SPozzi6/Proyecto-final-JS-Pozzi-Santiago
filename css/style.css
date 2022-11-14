@@ -9,6 +9,11 @@
 
 html {
     font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 100px;
 }
 
 body {
@@ -19,7 +24,7 @@ body {
 .h2-subtitulo {
     font-size: 2rem;
     text-align: center;
-    color: white;
+    color: black;
 }
 
 .h3-subtitulo {
@@ -47,14 +52,14 @@ body {
 
         .link-lista {
             color: #ffcd70;
-            text-decoration: underline 0.5px;
+            text-decoration: none;
             list-style: none;
             font-weight: lighter;
             font-size: 2rem;
         }
 
         .link-lista:hover {
-            color: black;
+            color: white;
             transition: 1s;
             border-radius: 4px;
             cursor: pointer;
@@ -158,7 +163,7 @@ body {
             .link-imagen {
                 text-decoration: none;
                 font-weight: bold;
-                color: black;
+                color: #ffcd70;
             }
 
             .link-imagen:hover {
@@ -565,5 +570,19 @@ body {
         }
 
 /* TERMINA SECCION CARD DE RESERVA */
+
+/* EMPIEZA SECCION MIS RESERVAS */
+
+.contenedor-reserva {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+    .articulo-reserva {
+        width: 45%;
+    }
+
+/* TERMINA SECCION MIS RESERVAS */
 
 }
