@@ -20,7 +20,7 @@ function crearCard(habitacion, nombre, precio) {
     articulo.classList.add("articulo-card");
 
     const img = document.createElement("img");
-    img.setAttribute('src', `../images/habitaciones/habitacion${habitacion}.jpg`);
+    img.setAttribute('src', `images/habitaciones/habitacion${habitacion}.jpg`);
     img.classList.add("imagen-articulo");
 
     const div = document.createElement("div");
