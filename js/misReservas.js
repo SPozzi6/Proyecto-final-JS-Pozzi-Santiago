@@ -40,15 +40,6 @@ function crearReserva () {
 // SECCION MIS RESERVAS
 if (arrayReservas !== null) {
     crearReserva();
-} else {
-        
-    Swal.fire({
-        icon: "error",
-        title: "No hay reservas",
-        text: "No has realizado reservas aún",
-        width: 400,
-    
-    });
 };
 
 // EVENTO QUE ABRE MIS RESERVAS
@@ -58,12 +49,25 @@ openMisReservas.addEventListener("click", (event) => {
     
     event.preventDefault();
 
-    const body = document.getElementById("body");
-    body.classList.add("scroll-block");
+    if (arrayReservas !== null) {
 
-    const contenedorGeneral = document.getElementById("contenedor-general-reserva");
-    contenedorGeneral.classList.remove("hidden");
-    contenedorGeneral.classList.add("prioridad-reserva");
+        const body = document.getElementById("body");
+        body.classList.add("scroll-block");
+
+        const contenedorGeneral = document.getElementById("contenedor-general-reserva");
+        contenedorGeneral.classList.remove("hidden");
+        contenedorGeneral.classList.add("prioridad-reserva");
+
+    } else {
+        
+        Swal.fire({
+            icon: "error",
+            title: "No hay reservas",
+            text: "No has realizado reservas aún",
+            width: 400,
+        
+        });
+    };
 
 });
 

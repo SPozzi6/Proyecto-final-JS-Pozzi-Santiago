@@ -579,9 +579,13 @@ body {
     justify-content: space-around;
 }
 
-    .articulo-reserva {
-        width: 45%;
+    .card-reserva {
+        width: 100%;
     }
+
+        .articulo-reserva {
+            width: 45%;
+        }
 
 /* TERMINA SECCION MIS RESERVAS */
 
