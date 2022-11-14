@@ -89,9 +89,13 @@ function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
 
     if(checkIn.c === null || checkIn === "" || checkOut.c === null || checkOut === "" || invitados === null || invitados === "" || checkIn > checkOut || checkIn < fechaHoy || checkOut < fechaHoy) {
         
-        event.preventDefault();
-        
-        alert("Por favor vuelva a ingresar los datos")
+        Swal.fire({
+            icon: "error",
+            title: "Campos vacíos",
+            text: "Por favor, ingrese todos los datos",
+            width: 400,
+        });
+
         //LIMPIO INPUTS
         inputCheckIn.value = "";
         inputCheckOut.value = "";
@@ -127,6 +131,8 @@ let habitacionesReservadas = obtenerReservas();
 //EVENTO DE BUSQUEDA DE HABITACION
 formularioDeReserva.addEventListener("submit", async (event) => {
 
+    event.preventDefault();
+    
     let checkIn = DateTime.fromISO(inputCheckIn.value);
     let checkOut = DateTime.fromISO(inputCheckOut.value);
     let invitados = inputInvitados.value;
@@ -155,11 +161,22 @@ formularioDeReserva.addEventListener("submit", async (event) => {
             localStorage.setItem("estadia-total", estadiaTotal);
             localStorage.setItem("habitacion-a-reservar", JSON.stringify(habitacionEncontrada));
             localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
-            localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas))
+            localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas));
+            
+            location.reload();
 
     } else {
 
-        alert ("No hay habitaciones disponibles o los datos ingresados son incorrectos");
+        Swal.fire({
+            icon: "error",
+            title: "Datos incorrectos",
+            text: "No hay habitaciones disponibles o los datos ingresados son incorrectos",
+            width: 400,
+        });
+
+        inputCheckIn.value = "";
+        inputCheckOut.value = "";
+        inputInvitados.value = "";
 
     };
 
@@ -198,11 +215,11 @@ const estadiaTotal = JSON.parse(estadiaTotalJSON);
 //VARIABLES GLOBALES
 const realizarReserva = document.getElementById("datosReserva");
 
-const inputNombre = document.getElementById("nombre");
-const inputApellido = document.getElementById("apellido");
+const inputNombre = document.getElementById("name");
+const inputApellido = document.getElementById("surname");
 const inputDni = document.getElementById("dni");
 const inputTelefono = document.getElementById("telefono");
-const inputEmail = document.getElementById("email");
+const inputEmail = document.getElementById("e-mail");
 const inputPais = document.getElementById("pais");
 const inputCiudad = document.getElementById("ciudad");
 const inputDireccion = document.getElementById("direccion");
@@ -229,31 +246,21 @@ function habitacionOcupada (habitacion) {
 function validarDatosCliente(){
 
     if(inputNombre.value, inputApellido.value, inputDni.value, inputTelefono.value, inputEmail.value, inputPais.value, inputCiudad.value, inputDireccion.value, inputCodigoPostal.value === null || inputNombre.value, inputApellido.value, inputDni.value, inputTelefono.value, inputEmail.value, inputPais.value, inputCiudad.value, inputDireccion.value, inputCodigoPostal.value === "") {
-        
-        event.preventDefault();
-        alert("Por favor, ingrese sus datos correctamente")
-        
-        //LIMPIO INPUTS
-        inputNombre.value = "";
-        inputApellido.value = "";
-        inputDni.value = "";
-        inputTelefono.value = "";
-        inputEmail.value = "";
-        inputPais.value = "";
-        inputCiudad.value = "";
-        inputDireccion.value = "";
-        inputCodigoPostal.value = "";
 
-        } else{
+        return false;
         
-            window.location.href = "index.html";
+    } else{
         
-        };
+        return true;
+        
+    };
 
 };
 
 //EVENTO FORMULARIO DE RESERVA
 realizarReserva.addEventListener ("submit", (event) => {
+
+    event.preventDefault();
 
     const nombre = inputNombre.value;
     const apellido = inputApellido.value;
@@ -266,11 +273,27 @@ realizarReserva.addEventListener ("submit", (event) => {
     const codigoPostal = inputCodigoPostal.value;
 
     //VALIDO LOS DATOS DEL CLIENTE
-    validarDatosCliente();
+    const validarDatos = validarDatosCliente();
 
-    if (nombre, apellido, dni, telefono, email, pais, ciudad, direccion, codigoPostal === null || nombre, apellido, dni, telefono, email, pais, ciudad, direccion, codigoPostal === "") {
+    if (validarDatos === false) {
     
-        alert("Vuelva a intentarlo");
+        Swal.fire({
+            icon: "error",
+            title: "Datos incorrectos",
+            text: "Por favor, ingrese sus datos correctamente",
+            width: 400,
+        });
+
+        // //LIMPIO INPUTS
+        inputNombre.value = "";
+        inputApellido.value = "";
+        inputDni.value = "";
+        inputTelefono.value = "";
+        inputEmail.value = "";
+        inputPais.value = "";
+        inputCiudad.value = "";
+        inputDireccion.value = "";
+        inputCodigoPostal.value = "";
 
     } else {
     
@@ -287,11 +310,6 @@ realizarReserva.addEventListener ("submit", (event) => {
         //COLOCO RESERVADO = TRUE EN LA HABITACION A RESERVAR
         habitacionOcupada(habitacionAReservar);
 
-        //CARGO RESERVAS AL LOCAL STORAGE
-        localStorage.setItem("reservas", JSON.stringify(habitacionesReservadas));
-        localStorage.setItem("habitaciones", JSON.stringify(arrayHabitaciones));
-        alert("Su reserva ha sido registrada exitosamente, muchas gracias");
-
         //BORRO DATOS INNECESARIOS
         localStorage.removeItem("habitacion-a-reservar");
         localStorage.removeItem("check-in");
@@ -299,8 +317,27 @@ realizarReserva.addEventListener ("submit", (event) => {
         localStorage.removeItem("huespedes");
         localStorage.removeItem("estadia-total");
 
-    };
+        Swal.fire({
+            icon: "success",
+            title: "Reserva realizada",
+            text: "Su reserva fue realizada con éxito, muchas gracias",
+            width: 400,
+            showConfirmButton: true,
+            confirmButtonText: "Confirmar",
+            allowOutsideClick: false,
+        }).then ((result) => {
+            
+            if (result.isConfirmed) {
 
+                //CARGO RESERVAS AL LOCAL STORAGE
+                localStorage.setItem("reservas", JSON.stringify(habitacionesReservadas));
+                localStorage.setItem("habitaciones", JSON.stringify(arrayHabitaciones));
+                location.reload();
+            
+            };
+        });
+
+    };
 });
 
 // TERMINA SECCION FOMULARIO DE DATOS PARA CONFIRMAR RESERVA
@@ -319,11 +356,26 @@ cancelar.addEventListener ("click", (event) => {
     localStorage.removeItem("huespedes");
     localStorage.removeItem("estadia-total");
     
-    alert("Operación cancelada");
+    Swal.fire({
+        icon: "error",
+        title: "Operación de reserva cancelada",
+        text: "Has cancelado la operación, volveras al inicio",
+        width: 400,
+        showConfirmButton: true,
+        confirmButtonText: "Volver",
+        allowOutsideClick: false,
+    }).then((result) => {
 
-    //RECARGO LA PAGINA
-    location.reload();
-})
+        if (result.isConfirmed) {
+
+            //RECARGO LA PAGINA
+            location.reload();
+
+        };
+
+    });
+
+});
 
 
 console.log(habitaciones);

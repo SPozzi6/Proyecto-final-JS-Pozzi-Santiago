@@ -19,7 +19,7 @@ function crearReserva () {
         articulo.classList.add("articulo-reserva");
 
         const img = document.createElement("img");
-        img.setAttribute('src', `../images/habitaciones/habitacion${reservas.habitacion.idHabitacion}.jpg`);
+        img.setAttribute('src', `images/habitaciones/habitacion${reservas.habitacion.idHabitacion}.jpg`);
         img.classList.add("imagen-reserva");
 
         const div = document.createElement("div");
@@ -53,6 +53,8 @@ openMisReservas.addEventListener("click", (event) => {
 
     if (arrayReservas !== null){
         crearReserva();
+    } else {
+        alert("No has realizado ninguna reserva")
     }
 });
 
