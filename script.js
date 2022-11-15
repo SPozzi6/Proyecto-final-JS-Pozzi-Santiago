@@ -91,8 +91,8 @@ function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
         
         Swal.fire({
             icon: "error",
-            title: "Campos vacíos",
-            text: "Por favor, ingrese todos los datos",
+            title: "Datos incorrectos",
+            text: "No hay habitaciones disponibles o los datos ingresados son incorrectos",
             width: 400,
         });
 
@@ -144,41 +144,43 @@ formularioDeReserva.addEventListener("submit", async (event) => {
     //VALIDO DATOS INGRESADOS
     const validar = validarDatos(checkIn, checkOut, fechaHoy, invitados);
 
-    //BUSCO HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
-    const habitacionEncontrada = await buscarHabitacion(invitados);
+    if (validar === true) {
+        
+        //BUSCO HABITACION PARA LA CANTIDAD DE PERSONAS INGRESADA
+        const habitacionEncontrada = await buscarHabitacion(invitados);
 
-    //REVISO SI LA HABITACION ESTA RESERVADA
-    const disponible = revisarReservado(habitacionEncontrada);
+        //REVISO SI LA HABITACION ESTA RESERVADA
+        const disponible = revisarReservado(habitacionEncontrada);
 
-    //SI LA HABITACION ESTA DISPONIBLE CARGO DATOS A LS, SI NO PIDO NUEVOS DATOS
-    if (disponible === true && validar === true) {
+        //SI LA HABITACION ESTA DISPONIBLE CARGO DATOS A LS, SI NO PIDO NUEVOS DATOS
+        if (disponible === true && validar === true) {
 
-            //CARGO DATOS AL LOCAL STORAGE             
-            localStorage.setItem("check-in", checkIn);
-            localStorage.setItem("check-out", checkOut);
-            localStorage.setItem("huespedes", invitados);
-            localStorage.setItem("estadia-total", estadiaTotal);
-            localStorage.setItem("habitacion-a-reservar", JSON.stringify(habitacionEncontrada));
-            localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
-            localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas));
-            
-            location.reload();
+                //CARGO DATOS AL LOCAL STORAGE             
+                localStorage.setItem("check-in", checkIn);
+                localStorage.setItem("check-out", checkOut);
+                localStorage.setItem("huespedes", invitados);
+                localStorage.setItem("estadia-total", estadiaTotal);
+                localStorage.setItem("habitacion-a-reservar", JSON.stringify(habitacionEncontrada));
+                localStorage.setItem("habitaciones", JSON.stringify(habitaciones));
+                localStorage.setItem("habitaciones-reservadas", JSON.stringify(habitacionesReservadas));
+                
+                location.reload();
 
-    } else {
+        } else {
 
-        Swal.fire({
-            icon: "error",
-            title: "Datos incorrectos",
-            text: "No hay habitaciones disponibles o los datos ingresados son incorrectos",
-            width: 400,
-        });
+            Swal.fire({
+                icon: "error",
+                title: "Datos incorrectos",
+                text: "No hay habitaciones disponibles o los datos ingresados son incorrectos",
+                width: 400,
+            });
 
-        inputCheckIn.value = "";
-        inputCheckOut.value = "";
-        inputInvitados.value = "";
+            inputCheckIn.value = "";
+            inputCheckOut.value = "";
+            inputInvitados.value = "";
 
+        };
     };
-
 });
 
 // TERMINA SECCION CHECK IN - CHECK OUT - INVITADOS Y EVENTO DE BUSQUEDA DE HABITACION
