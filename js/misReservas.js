@@ -1,11 +1,16 @@
 const arrayReservasJSON = localStorage.getItem("reservas"); 
 const arrayReservas = JSON.parse(arrayReservasJSON);
 
+const DateLuxon = luxon.DateTime;
+
 function crearReserva () {
 
     const contenedorReserva = document.getElementById("contenedor-reserva");
     
     for (reservas of arrayReservas) {
+
+        const checkIn = DateLuxon.fromISO(reservas.checkIn);
+        const checkOut = DateLuxon.fromISO(reservas.checkOut);
 
         const articulo = document.createElement("article");
         articulo.classList.add("articulo-reserva");
@@ -26,7 +31,7 @@ function crearReserva () {
         parrafo2.classList.add("texto-articulo");
 
         const parrafo3 = document.createElement("p");
-        parrafo3.innerText = `Desde ${reservas.checkIn} hasta ${reservas.checkOut}`;
+        parrafo3.innerText = `Desde ${checkIn.day} / ${checkIn.month} / ${checkIn.year} hasta ${checkOut.day} / ${checkOut.month} / ${checkOut.year}`;
         parrafo3.classList.add("texto-articulo")
 
         div.append(parrafo1);
