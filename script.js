@@ -87,7 +87,7 @@ function revisarReservado (habitacion) {
 //VALIDO LOS DATOS INGRESADOS
 function validarDatos(checkIn, checkOut, fechaHoy, invitados) {
 
-    if(checkIn.c === null || checkIn === "" || checkOut.c === null || checkOut === "" || invitados === null || invitados === "" || checkIn > checkOut || checkIn < fechaHoy || checkOut < fechaHoy) {
+    if(checkIn === null || checkIn === "" || checkOut.c === null || checkOut === "" || invitados === null || invitados === "" || checkIn > checkOut || checkIn < fechaHoy || checkOut < fechaHoy) {
         
         Swal.fire({
             icon: "error",
@@ -225,6 +225,7 @@ const inputPais = document.getElementById("pais");
 const inputCiudad = document.getElementById("ciudad");
 const inputDireccion = document.getElementById("direccion");
 const inputCodigoPostal = document.getElementById("codigo-postal");
+
 
 //FUNCIONES
 

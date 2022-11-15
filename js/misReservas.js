@@ -31,7 +31,7 @@ function crearReserva () {
         parrafo2.classList.add("texto-articulo");
 
         const parrafo3 = document.createElement("p");
-        parrafo3.innerText = `Desde ${checkIn.day} / ${checkIn.month} / ${checkIn.year} hasta ${checkOut.day} / ${checkOut.month} / ${checkOut.year}`;
+        parrafo3.innerText = `Desde ${checkIn.day}/${checkIn.month}/${checkIn.year} hasta ${checkOut.day}/${checkOut.month}/${checkOut.year}`;
         parrafo3.classList.add("texto-articulo")
 
         div.append(parrafo1);
