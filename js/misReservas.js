@@ -25,8 +25,13 @@ function crearReserva () {
         parrafo2.innerText = `Precio total de la estadia: $${reservas.precio}`;
         parrafo2.classList.add("texto-articulo");
 
+        const parrafo3 = document.createElement("p");
+        parrafo3.innerText = `Desde ${reservas.checkIn} hasta ${reservas.checkOut}`;
+        parrafo3.classList.add("texto-articulo")
+
         div.append(parrafo1);
         div.append(parrafo2);
+        div.append(parrafo3);
 
         articulo.append(img);
         articulo.append(div);
